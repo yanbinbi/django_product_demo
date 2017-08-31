@@ -20,31 +20,20 @@
          <th>产品类别</th>
          <th>库存数量</th>
          <th>产品价格</th>
-          <th>操作</th>
+         <th>产品描述</th>
       </tr>
    </thead>
    <tbody>
+   {% for product in product_list %}
       <tr>
-         <td>Tanmay</td>
-         <td>Bangalore</td>
-         <td>560001</td>
+          <td>{{ product.product_name }}</td>
+          <td>{{ product.spec }}</td>
+          <td>{{ product.cate }}</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.desc }}</td>
       </tr>
-      <tr>
-         <td>Sachin</td>
-         <td>Mumbai</td>
-         <td>400003</td>
-          <td>Sachin</td>
-         <td>Mumbai</td>
-         <td>400003</td>
-      </tr>
-      <tr>
-         <td>Uma</td>
-         <td>Pune</td>
-         <td>411027</td>
-          <td>Uma</td>
-         <td>Pune</td>
-         <td>411027</td>
-      </tr>
+   {% endfor %}
    </tbody>
 </table>
 <ul class="pager">
