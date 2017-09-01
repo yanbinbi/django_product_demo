@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<ul class="pager">
+    <li><a href="?page=1">第一页</a></li>
+    {% if product_list.has_previous %}
+    <li><a href="?page={{ product_list.previous_page_number }}">上一页</a></li>
+    {% endif %}
+    {% if product_list.has_next %}
+    <li><a href="?page={{ product_list.next_page_number }}">下一页</a></li>
+    {% endif %}
+    <li><a href="?page={{ product_list.paginator.num_pages }}">最末页</a></li>
+</ul>
