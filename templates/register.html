@@ -41,29 +41,32 @@
                                         {% csrf_token %}
                                         <div class="user-email">
                                             <label for="email"><i class="am-icon-envelope-o"></i></label>
-{#                                            <input type="email" name="" id="email" placeholder="请输入邮箱账号">#}
+{#                                            <input type="email" name="email" id="email" placeholder="请输入邮箱账号">#}
                                             {{ email_register_form.email }}
                                         </div>
                                         <div class="user-pass">
                                             <label for="password"><i class="am-icon-lock"></i></label>
-{#                                            <input type="password" name="" id="password" placeholder="设置密码">#}
+{#                                            <input type="password" name="password" id="password" placeholder="设置密码">#}
                                             {{ email_register_form.password }}
                                         </div>
                                         <div class="user-pass">
                                             <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-{#                                            <input type="password" name="" id="passwordRepeat" placeholder="确认密码">#}
+{#                                            <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="确认密码">#}
                                             {{ email_register_form.password_repeat }}
                                         </div>
+
+{#                                        <div class="login-links">#}
+{#                                            <input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》#}
+{#                                        </div>#}
+                                        <div class="am-cf">
+                                            <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+                                        </div>
+
+                                        <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+
                                     </form>
                  
-                                     <div class="login-links">
-                                         <label for="reader-me">
-                                             <input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-                                         </label>
-                                     </div>
-                                     <div class="am-cf">
-                                        <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-                                     </div>
+
 
 								</div>
 
