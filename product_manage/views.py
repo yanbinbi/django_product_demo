@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render, redirect
 from product_manage.models import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
@@ -5,6 +6,7 @@ from product_manage.forms import EmailRegisterForm, LoginForm, PhoneRegisterForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password
 
+logger = logging.getLogger('product_manage.views')
 #首页
 def home(request):
     return render(request, "home.html", locals())
@@ -29,8 +31,9 @@ def email_register(request):
         else:
             email_register_form = EmailRegisterForm()
 
-    except:
-        pass
+    except Exception as e:
+        logger.error(e)
+        print(e)
 
     return render(request, 'register.html', locals())
 
@@ -49,11 +52,12 @@ def phone_register(request):
                 return render(request, "failure.html", {"reason": phone_register_form.errors})
         else:
             phone_register_form = PhoneRegisterForm()
-    except:
-        pass
+    except Exception as e:
+        logger.error(e)
 
     return render(request, 'register.html', locals())
 
+# 登录
 def do_login(request):
     try:
         if request.method == "POST":
@@ -62,9 +66,11 @@ def do_login(request):
                 # 将用户的注册邮箱或手机默认设置为username
                 username = login_form.cleaned_data["username"]
                 password = login_form.cleaned_data["password"]
+                print("username", username)
                 # 采用django自带的验证authenticate
-                #判断获得的username是邮箱还是手机号码
+                # 判断获得的username是邮箱还是手机号码
                 user = authenticate(email=username, password=password)
+                print(user)
                 if user is None:
                     user = authenticate(phone=username, password=password)
                 # 如果用户存在
@@ -80,5 +86,6 @@ def do_login(request):
         else:
             login_form = LoginForm()
     except Exception as e:
-        pass
+        logger.error(e)
+        print(e)
     return render(request, "login.html", locals())
