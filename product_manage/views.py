@@ -4,7 +4,7 @@ from product_manage.models import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from product_manage.forms import EmailRegisterForm, LoginForm, PhoneRegisterForm
 from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 logger = logging.getLogger('product_manage.views')
 #首页
@@ -25,6 +25,9 @@ def email_register(request):
                 user = User.objects.create(email=email_register_form.cleaned_data["email"],
                             password=make_password(email_register_form.cleaned_data["password"]))
                 user.save()
+                # 登录
+                user.backend = 'django.contrib.auth.backends.ModelBackend'  # 指定默认的登录验证方式
+                login(request, user)
                 return render(request, "index.html", locals())
             else:
                 return render(request, "failure.html", {"reason": email_register_form.errors})
