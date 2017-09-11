@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, Invali
 from product_manage.forms import EmailRegisterForm, LoginForm, PhoneRegisterForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password, check_password
+from product_manage.models import User
 
 logger = logging.getLogger('product_manage.views')
 #首页
@@ -23,11 +24,8 @@ def email_register(request):
             email_register_form = EmailRegisterForm(request.POST)
             if email_register_form.is_valid():
                 user = User.objects.create(email=email_register_form.cleaned_data["email"],
-                            password=make_password(email_register_form.cleaned_data["password"]))
+                                           password=make_password(email_register_form.cleaned_data["password"], 'ybb', 'pbkdf2_sha256'))
                 user.save()
-                # 登录
-                user.backend = 'django.contrib.auth.backends.ModelBackend'  # 指定默认的登录验证方式
-                login(request, user)
                 return render(request, "index.html", locals())
             else:
                 return render(request, "failure.html", {"reason": email_register_form.errors})
@@ -72,18 +70,16 @@ def do_login(request):
                 print("username", username)
                 # 采用django自带的验证authenticate
                 # 判断获得的username是邮箱还是手机号码
-                user = authenticate(email=username, password=password)
-                print(user)
+                user = User.objects.filter(email__exact=username, password__exact=make_password(password, 'ybb', 'pbkdf2_sha256'))
+                print("user", user)
                 if user is None:
-                    user = authenticate(phone=username, password=password)
+                    user = User.objects.filter(phone__exact=username, password__exact=make_password(password, 'ybb', 'pbkdf2_sha256'))
                 # 如果用户存在
                 if user is not None:
-                    user.backend = 'django.contrib.auth.backends.ModelBackend'
-                    login(request, user)
+                    # 登录成功，页面跳转
+                    return render(request, "index.html", locals())
                 else:
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
-                # 登录成功，页面跳转
-                return render(request, "index.html", locals())
             else:
                 return render(request, "failure.html", {"reason": login_form.errors})
         else:
