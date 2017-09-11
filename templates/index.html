@@ -72,7 +72,7 @@
 			<div class="long-title"><span class="all-goods">全部分类</span></div>
 			<div class="nav-cont">
 				<ul>
-					<li class="index"><a href="#">首页</a></li>
+					<li class="index"><a href="{% static 'home' %}">首页</a></li>
 					<li class="qc"><a href="#">闪购</a></li>
 					<li class="qc"><a href="#">限时抢</a></li>
 					<li class="qc"><a href="#">团购</a></li>
@@ -99,7 +99,7 @@
 									</a>
 									<div class="m-baseinfo">
 										<a class="m-pic" href="information.html">
-											<img src="../images/getAvatar.do.jpg">
+											<img src="{% static 'img/getAvatar.do.jpg' %}">
 										</a>
 										<div class="m-info">
 											<em class="s-name">{{ login_form.username }}</em>
@@ -152,19 +152,19 @@
 									</div>
 									<p class="m-big squareS">
 										<a href="#">
-											<i><img src="../images/shopping.png"/></i>
+											<i><img src="{% static 'img/shopping.png' %}"/></i>
 											<span class="m-title">能购物</span>
 										</a>
 									</p>
 									<p class="m-big squareA">
 										<a href="#">
-											<i><img src="../images/safe.png"/></i>
+											<i><img src="{% static 'img/safe.png' %}"/></i>
 											<span class="m-title">够安全</span>
 										</a>
 									</p>
 									<p class="m-big squareL">
 										<a href="#">
-											<i><img src="../images/profit.png"/></i>
+											<i><img src="{% static 'img/profit.png' %}"/></i>
 											<span class="m-title">很灵活</span>
 										</a>
 									</p>

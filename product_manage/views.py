@@ -12,6 +12,10 @@ logger = logging.getLogger('product_manage.views')
 def home(request):
     return render(request, "home.html", locals())
 
+# 个人中心
+def index(request):
+    return render(request, "index.html", locals())
+
 # 跳转用户注册页面
 def register(request):
     email_register_form = EmailRegisterForm()
@@ -67,11 +71,9 @@ def do_login(request):
                 # 将用户的注册邮箱或手机默认设置为username
                 username = login_form.cleaned_data["username"]
                 password = login_form.cleaned_data["password"]
-                print("username", username)
-                # 采用django自带的验证authenticate
+
                 # 判断获得的username是邮箱还是手机号码
                 user = User.objects.filter(email__exact=username, password__exact=make_password(password, 'ybb', 'pbkdf2_sha256'))
-                print("user", user)
                 if user is None:
                     user = User.objects.filter(phone__exact=username, password__exact=make_password(password, 'ybb', 'pbkdf2_sha256'))
                 # 如果用户存在
