@@ -22,6 +22,7 @@ def register(request):
     phone_register_form = PhoneRegisterForm()
     return render(request, "register.html", locals())
 
+# 邮箱注册
 def email_register(request):
     try:
         if request.method == "POST":
@@ -42,6 +43,7 @@ def email_register(request):
 
     return render(request, 'register.html', locals())
 
+# 手机注册
 def phone_register(request):
     try:
         if request.method == "POST":
@@ -78,7 +80,7 @@ def do_login(request):
                     user = User.objects.filter(phone__exact=username, password__exact=make_password(password, 'ybb', 'pbkdf2_sha256'))
                 # 如果用户存在
                 if user is not None:
-                    # 登录成功，页面跳转
+                    # 登录成功，页面跳转到个人中心
                     return render(request, "index.html", locals())
                 else:
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
