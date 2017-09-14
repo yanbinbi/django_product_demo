@@ -5,11 +5,12 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, Invali
 from product_manage.forms import EmailRegisterForm, LoginForm, PhoneRegisterForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password, check_password
-from product_manage.models import User
+from product_manage.models import User, Product
 
 logger = logging.getLogger('product_manage.views')
 #首页
 def home(request):
+    product_list = Product.objects.all()
     return render(request, "home.html", locals())
 
 # 个人中心

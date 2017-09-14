@@ -1129,15 +1129,13 @@
 					
 					<div class="am-container " >
 						<div class="shopTitle ">
-							<h4 class="floor-title">甜品</h4>
-							<div class="floor-subtitle"><em class="am-icon-caret-left"></em><h3>每一道甜品都有一个故事</h3></div>
+							<h4 class="floor-title">数码产品</h4>
+							<div class="floor-subtitle"><em class="am-icon-caret-left"></em><h3>科技改变生活</h3></div>
 							<div class="today-brands " style="right:0px ;top:13px;">
-								<a href="# ">桂花糕</a>|
-								<a href="# ">奶皮酥</a>|
-								<a href="# ">栗子糕 </a>|
-								<a href="# ">马卡龙</a>|
-								<a href="# ">铜锣烧</a>|
-								<a href="# ">豌豆黄</a>
+								<a href="# ">手机</a>|
+								<a href="# ">电脑</a>|
+								<a href="# ">平板电脑</a>|
+								<a href="# ">电脑配件</a>|
 							</div>
 
 						</div>
@@ -1171,17 +1169,19 @@
 						</div>
 						
 						<div class="am-u-sm-7 am-u-md-5 am-u-lg-2 text-two big">
-							
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									
-								</div>
-								<a href="# "><img src="{% static 'img/act1.jpg' %}" /></a>
+							    {% for product in product_list %}
+{#                                    {% if product.category == "数码" %}#}
+                                        <div class="outer-con ">
+                                            <div class="title ">
+                                                {{ product.product_name }}
+                                            </div>
+                                            <div class="sub-title ">
+                                                ¥{{ product.product_price }}
+                                            </div>
+                                        </div>
+{#                                    {% endif %}#}
+                                {% endfor %}
+								<a href="# "><img src="{% static 'img/iPhoneX.JPEG' %}" /></a>
 						</div>
 
 						<li>
