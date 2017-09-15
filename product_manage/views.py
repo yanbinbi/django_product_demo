@@ -10,9 +10,7 @@ from product_manage.models import User, Product
 logger = logging.getLogger('product_manage.views')
 #首页
 def home(request):
-    # 商品展示
     product_list = Product.objects.all()
-
     return render(request, "home.html", locals())
 
 # 个人中心
@@ -95,4 +93,3 @@ def do_login(request):
         logger.error(e)
         print(e)
     return render(request, "login.html", locals())
-
