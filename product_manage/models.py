@@ -12,4 +12,7 @@ class User(models.Model):
 # 商品
 class Product(models.Model):
     product_name = models.CharField("商品名称", max_length=50)
-    product_price = models.DecimalField("商品价格", max_length=8)
+    product_price = models.DecimalField("商品价格", decimal_places=2, max_digits=8)
+
+    def __str__(self):
+        return self.product_name
