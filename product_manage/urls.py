@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^phone_register/$', views.phone_register, name="phone_register"),
     url(r'^login/$', views.do_login, name="login"),
     url(r'^index/$', views.index, name="index"),
+    url(r'^product_info/$', views.show_product, name="show_product"),
+    url(r'^shopcart/$', views.shopcart, name="shopcart"),
 ]

@@ -102,3 +102,21 @@ def do_logout(request):
         logout(request)
     except Exception as e:
         logger.error(e)
+
+# 商品详情展示
+def show_product(request):
+    try:
+        product_name = request.GET.get("product_name")
+        product = Product.objects.filter(product_name=product_name)
+        return render(request, "introduction.html", locals())
+    except Exception as e:
+        logger.error(e)
+
+# 购物车
+def shopcart(request):
+    try:
+        product_name = request.GET.get("product_name")
+        product = Product.objects.filter(product_name=product_name)
+
+    except Exception as e:
+        logger.error(e)

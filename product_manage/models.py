@@ -9,6 +9,7 @@ class User(models.Model):
     password = models.CharField("密码", max_length=255)
     nickname = models.CharField("昵称", max_length=40, default="nickname")
     name = models.CharField("姓名", max_length=20, default="name")
+    account = models.DecimalField("账户", max_digits=10, decimal_places=2, default=0)
 
 
 

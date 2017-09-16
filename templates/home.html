@@ -49,9 +49,9 @@
 				<!--悬浮搜索框-->
 
 				<div class="nav white">
-					<div class="logo"><img src="../images/logo.png" /></div>
+					<div class="logo"><img src="{% static 'img/logo.png' %}" /></div>
 					<div class="logoBig">
-						<li><img src="../images/logobig.png" /></li>
+						<li><img src="{% static 'img/logobig.png' %}" /></li>
 					</div>
 
 					<div class="search-bar pr">
@@ -1170,7 +1170,7 @@
 						
 						<div class="am-u-sm-7 am-u-md-5 am-u-lg-2 text-two big">
 							    {% for product in product_list %}
-{#                                    {% if product.category == "数码" %}#}
+                                    {% ifequal product.category "数码" %}
                                         <div class="outer-con ">
                                             <div class="title ">
                                                 {{ product.product_name }}
@@ -1179,9 +1179,10 @@
                                                 ¥{{ product.product_price }}
                                             </div>
                                         </div>
-{#                                    {% endif %}#}
+                                        <a href="{% url 'product_info' %}?product_name={{ product.product_name }}"><img src="{% static 'img/iPhoneX.JPEG' %}" /></a>
+                                    {% endifequal %}
                                 {% endfor %}
-								<a href="# "><img src="{% static 'img/iPhoneX.JPEG' %}" /></a>
+
 						</div>
 
 						<li>
