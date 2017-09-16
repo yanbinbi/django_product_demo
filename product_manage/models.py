@@ -31,4 +31,22 @@ class Product(models.Model):
     product_price = models.DecimalField("商品价格", max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category, verbose_name="商品分类")
 
+# 条目
+class LineItem(models.Model):
+    product = models.ForeignKey(Product)
+    unit_price = models.DecimalField(max_digits=8, decimal_places=2)
+    quantity = models.IntegerField()
 
+# 购物车
+class Cart(object):
+    def __init__(self, *args, **kwargs):
+        self.items = []
+        self.total_price = 0
+
+    def add_product(self, product):
+        self.total_price += product.product_price
+
+        for item in self.items:
+            if item.product.id == product.id:
+                item.quantity += 1
+        return self.items.append(LineItem(product=product, unit_price=product.product_price,quantity=1))

@@ -1,11 +1,13 @@
 import logging
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from product_manage.models import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from product_manage.forms import EmailRegisterForm, LoginForm, PhoneRegisterForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password, check_password
-from product_manage.models import User, Product
+from product_manage.models import User, Product, Cart
+from django.template.loader import get_template
+from django.template import RequestContext
 
 logger = logging.getLogger('product_manage.views')
 #首页
@@ -114,9 +116,11 @@ def show_product(request):
 
 # 购物车
 def shopcart(request):
-    try:
-        product_name = request.GET.get("product_name")
-        product = Product.objects.filter(product_name=product_name)
+    cart = request.session.get("cart", None)
+    t = get_template("shopcart.html")
+    if not cart:
+        cart = Cart()
+        request.session["cart"] = cart
+        c = RequestContext(request, locals())
+    return HttpResponse(t.render(c))
 
-    except Exception as e:
-        logger.error(e)
