@@ -124,3 +124,20 @@ def shopcart(request):
         c = RequestContext(request, locals())
     return HttpResponse(t.render(c))
 
+# 增加商品到购物车
+def add_to_cart(request, product_name):
+    product = Product.objects.get(product_name__exact=product_name)
+    cart = request.session.get("cart", None)
+    if not cart:
+        cart = Cart()
+        request.session["cart"] = cart
+        cart.add_product(product)
+        request.session["cart"] = cart
+
+    return shopcart(request)
+
+# 清空购物车
+def clean_cart(request):
+    request.session["cart"] = Cart()
+    return shopcart(request)
+

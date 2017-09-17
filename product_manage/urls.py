@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^index/$', views.index, name="index"),
     url(r'^product_info/$', views.show_product, name="show_product"),
     url(r'^shopcart/$', views.shopcart, name="shopcart"),
+    url(r'cart/view/(?P<product_name>[^/]+)/$', views.add_to_cart, name="add_to_cart"),
+    url(r'cart/clean/', views.clean_cart, name="clean_cart"),
 ]

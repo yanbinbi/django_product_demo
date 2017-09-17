@@ -5,4 +5,4 @@ from product_manage.models import *
 admin.site.register(User)
 admin.site.register(Category)
 admin.site.register(Product)
-admin.site.register(Address)
+admin.site.register(LineItem)

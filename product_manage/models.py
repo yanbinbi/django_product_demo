@@ -10,13 +10,7 @@ class User(models.Model):
     nickname = models.CharField("昵称", max_length=40, default="nickname")
     name = models.CharField("姓名", max_length=20, default="name")
     account = models.DecimalField("账户", max_digits=10, decimal_places=2, default=0)
-
-
-
-# 地址类
-class Address(models.Model):
-    content = models.TextField("地址", max_length=255)
-    user = models.ForeignKey(User, verbose_name="用户")
+    address = models.TextField(max_length=255, default="")
 
 # 商品分类
 class Category(models.Model):
@@ -49,4 +43,4 @@ class Cart(object):
         for item in self.items:
             if item.product.id == product.id:
                 item.quantity += 1
-        return self.items.append(LineItem(product=product, unit_price=product.product_price,quantity=1))
+        return self.items.append(LineItem(product=product, unit_price=product.product_price, quantity=1))

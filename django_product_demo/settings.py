@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'django_product_demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "django_product",
+        'NAME': "django_product_demo",
         'USER': 'root',
-        'PASSWORD': 'yan',
+        'PASSWORD': 'yanbb',
     }
 }
 
